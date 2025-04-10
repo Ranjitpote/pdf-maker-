@@ -1,0 +1,53 @@
+/* Base Styles */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, #6B73FF 0%, #000DFF 100%);
+    color: white;
+}
+
+/* Feature Icons */
+.feature-icon {
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .navbar-nav {
+        padding-top: 1rem;
+    }
+    
+    #video, #image-preview {
+        max-width: 100%;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #121212;
+        color: #f8f9fa;
+    }
+    
+    .card {
+        background-color: #1e1e1e;
+        border-color: #444;
+    }
+    
+    .bg-light {
+        background-color: #2d2d2d !important;
+    }
+    
+    .text-muted {
+        color: #aaa !important;
+    }
+}

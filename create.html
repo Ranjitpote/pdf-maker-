@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create PDF - PDF Maker</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- Cropper.js CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">PDF Maker</a>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="index.html"><i class="bi bi-arrow-left"></i> Back to Home</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h3 class="mb-0"><i class="bi bi-file-earmark-plus"></i> Create New PDF</h3>
+                    </div>
+                    <div class="card-body">
+                        <!-- Image Upload -->
+                        <div class="mb-4">
+                            <label class="form-label">Upload Image</label>
+                            <input type="file" id="image-upload" class="form-control" accept="image/*">
+                        </div>
+
+                        <!-- Camera Capture -->
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h5><i class="bi bi-camera"></i> Camera Capture</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex flex-column flex-md-row gap-2 mb-3">
+                                    <button id="start-camera" class="btn btn-secondary flex-grow-1">
+                                        <i class="bi bi-camera-video"></i> Open Camera
+                                    </button>
+                                    <button id="capture-btn" class="btn btn-primary flex-grow-1" disabled>
+                                        <i class="bi bi-camera-fill"></i> Capture
+                                    </button>
+                                </div>
+                                <video id="video" class="img-fluid rounded d-none"></video>
+                                <canvas id="canvas" class="d-none"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Image Editor -->
+                        <div class="card mb-4 d-none" id="editor">
+                            <div class="card-header">
+                                <h5><i class="bi bi-pencil-square"></i> Image Editor</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="text-center mb-3">
+                                    <img id="image-preview" class="img-fluid rounded shadow" style="max-height: 400px;">
+                                </div>
+                                <div class="d-flex flex-wrap gap-2 justify-content-center">
+                                    <button onclick="rotateImage()" class="btn btn-outline-primary">
+                                        <i class="bi bi-arrow-clockwise"></i> Rotate
+                                    </button>
+                                    <button onclick="applyFilter('grayscale')" class="btn btn-outline-secondary">
+                                        <i class="bi bi-sliders"></i> Grayscale
+                                    </button>
+                                    <button onclick="resetImage()" class="btn btn-outline-danger">
+                                        <i class="bi bi-x-circle"></i> Reset
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- OCR Section -->
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h5><i class="bi bi-text-paragraph"></i> Text Extraction (OCR)</h5>
+                            </div>
+                            <div class="card-body">
+                                <button id="run-ocr" class="btn btn-info mb-3" disabled>
+                                    <i class="bi bi-gear"></i> Extract Text
+                                </button>
+                                <div id="ocr-progress" class="d-none mb-3">
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-striped progress-bar-animated" 
+                                             style="width: 0%"></div>
+                                    </div>
+                                    <small class="text-muted" id="progress-text">Initializing...</small>
+                                </div>
+                                <div id="ocr-result" class="p-3 bg-light rounded" style="min-height: 100px;"></div>
+                            </div>
+                        </div>
+
+                        <!-- PDF Actions -->
+                        <div class="d-grid gap-2">
+                            <button id="generate-pdf" class="btn btn-primary btn-lg" disabled>
+                                <i class="bi bi-file-earmark-pdf"></i> Generate PDF
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- JS Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="js/camera.js"></script>
+    <script src="js/editor.js"></script>
+    <script src="js/ocr.js"></script>
+    <script src="js/pdf.js"></script>
+</body>
+</html>
